@@ -14,8 +14,22 @@
     shape-rendering: crispEdges;
   }
 
+  button {
+    background-color: transparent;
+    color: white;
+  }
+
+  button.btn-on {
+    color: black;
+    background-color: grey;
+  }
+
   .grid path {
     stroke-width: 0;
+  }
+
+  .charts-hidden {
+    display: none;
   }
 
   /* Style the lines by removing the fill and applying a stroke */
@@ -76,7 +90,9 @@
 </style>
 <!-- Body tag is where we will append our SVG and SVG objects-->
 <body>
-<button>Reset</button>
+<button id="reset-btn">Reset</button>
+<button id="group1-btn" class="btn-on">Group 1</button>
+<button id="group2-btn" class="btn-on">Group 2</button>
 </body>
 
 <!-- Load in the d3 library -->

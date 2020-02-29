@@ -96,18 +96,18 @@ d3.csv("exp.csv").then(dataset => {
   //   .attr("width", width - margin.left - margin.right)
   //   .attr("height", height - margin.top - margin.bottom);
 
-  function lineFor(c,dFn) {
+  function lineFor(g, c,dFn) {
     const line = d3.line()
       .x(function(d) { return xScale(d.date); }) // set the x values for the line generator
       .y(function(d) { return yScale(dFn(d)); }) // set the y values for the line generator
       .curve(d3.curveMonotoneX) // apply smoothing to the line
 
-    charts.append("path")
+    g.append("path")
       .datum(dataset) // 10. Binds data to the line
       .attr("class", "line line-"+c) // Assign a class for styling
       .attr("d", line); // 11. Calls the line generator
     // 12. Appends a circle for each datapoint
-    charts.selectAll(".dot"+c)
+    g.selectAll(".dot"+c)
       .data(dataset)
       .enter().append("circle") // Uses the enter().append() method
       .attr("class", "dot dot"+c) // Assign a class for styling
@@ -121,14 +121,19 @@ d3.csv("exp.csv").then(dataset => {
       .on("mouseout", function () { });
 
   }
+  const g1 = charts.append("g")
+    .attr("class","charts-g1");
+  const g2 = charts.append("g")
+    .attr("class","charts-g2");
 
-  lineFor("tempout", d => d.tempout);
-  lineFor("t1a", d => d.t1a);
-  lineFor("t1b", d => d.t1b);
-  lineFor("t1c", d => d.t1c);
-  lineFor("t2a", d => d.t2a);
-  lineFor("t2b", d => d.t2b);
-  lineFor("t2c", d => d.t2c);
+
+  lineFor(charts,"tempout", d => d.tempout);
+  lineFor(g1,"t1a", d => d.t1a);
+  lineFor(g1,"t1b", d => d.t1b);
+  lineFor(g1,"t1c", d => d.t1c);
+  lineFor(g2,"t2a", d => d.t2a);
+  lineFor(g2,"t2b", d => d.t2b);
+  lineFor(g2,"t2c", d => d.t2c);
 
   function zoomed() {
     //view.attr("transform", d3.event.transform);
@@ -141,7 +146,8 @@ d3.csv("exp.csv").then(dataset => {
     d3.selectAll('.line').style("stroke-width", 2/d3.event.transform.k);
     d3.selectAll('.dot').attr("r", 5/d3.event.transform.k);
   }
-  d3.select("button")
+
+  d3.select("#reset-btn")
     .on("click", resetted);
 
   function resetted() {
@@ -149,5 +155,20 @@ d3.csv("exp.csv").then(dataset => {
       .duration(750)
       .call(zoom.transform, d3.zoomIdentity);
   }
+
+  d3.select("#group1-btn")
+    .on("click", toggleGroup("1"));
+  d3.select("#group2-btn")
+    .on("click", toggleGroup("2"));
+
+  function toggleGroup(g) {
+    return f => {
+      const groupElem = d3.select(".charts-g" + g)
+      groupElem.classed("charts-hidden", !groupElem.classed("charts-hidden"));
+      const btnElem = d3.select("#group"+g+"-btn")
+      btnElem.classed("btn-on", !btnElem.classed("btn-on"));
+    }
+  }
+
 
 });
