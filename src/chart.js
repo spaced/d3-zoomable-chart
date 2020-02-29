@@ -160,6 +160,23 @@ d3.csv("exp.csv").then(dataset => {
     .on("click", toggleGroup("1"));
   d3.select("#group2-btn")
     .on("click", toggleGroup("2"));
+  const legende = svg.append("g")
+    .attr("class","legende");
+  function drawLegende(y, c, text) {
+    legende.append("circle").attr("cx",10).attr("cy",y).attr("r", 4).attr("class",c);
+    legende.append("text").attr("x", 20).attr("y", y).text(text).attr("alignment-baseline","middle")
+  }
+
+
+  legende.append("rect").attr("x",0).attr("y",0).attr("height",120).attr("width",100)
+  drawLegende(10,"line-tempout", "Aussentemp" );
+  drawLegende(25,"line-t1a", "t1 a" );
+  drawLegende(40,"line-t1b", "t1 b" );
+  drawLegende(55,"line-t1c", "t1 c" );
+  drawLegende(70,"line-t2a", "t2 a" );
+  drawLegende(85,"line-t2b", "t2 b" );
+  drawLegende(100,"line-t2c", "t2 c" );
+
 
   function toggleGroup(g) {
     return f => {
