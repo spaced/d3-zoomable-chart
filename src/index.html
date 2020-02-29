@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<style type="text/css">
+  /* 13. Basic Styling with CSS */
+
+  body {
+    background: black;
+    color: white;
+  }
+  .grid line {
+    stroke: lightgrey;
+    stroke-opacity: 0.7;
+    shape-rendering: crispEdges;
+  }
+
+  .grid path {
+    stroke-width: 0;
+  }
+
+  /* Style the lines by removing the fill and applying a stroke */
+  .line-tempout {
+    fill: none;
+    stroke: #00ab00;
+    stroke-width: 3;
+  }
+
+  .line-t1a {
+    fill: none;
+    stroke: #af0fff;
+    stroke-width: 3;
+  }
+  .line-t1b {
+    fill: none;
+    stroke: #ef0fff;
+    stroke-width: 3;
+  }
+  .line-t1c {
+    fill: none;
+    stroke: #5900ff;
+    stroke-width: 3;
+  }
+  .line-t2a {
+    fill: none;
+    stroke: #ff000c;
+    stroke-width: 3;
+  }
+  .line-t2b {
+    fill: none;
+    stroke: #ff4000;
+    stroke-width: 3;
+  }
+  .line-t2c {
+    fill: none;
+    stroke: #ff800f;
+    stroke-width: 3;
+  }
+
+  .overlay {
+    fill: none;
+    pointer-events: all;
+  }
+
+  /* Style the dots by assigning a fill and stroke */
+  .dot {
+    fill: white;
+    opacity: 0.5;
+    stroke: none;
+  }
+
+  .focus circle {
+    fill: none;
+    stroke: steelblue;
+  }
+
+</style>
+<!-- Body tag is where we will append our SVG and SVG objects-->
+<body>
+<button>Reset</button>
+</body>
+
+<!-- Load in the d3 library -->
+<script src="d3/d3.min.js"></script>
+<script src="chart.js"></script>
